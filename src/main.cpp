@@ -3,10 +3,6 @@
 #include <esp_now.h>
 #include <CircularBuffer.h>
 
-//Define
-//------------------------------------------------------------------//
-#define CAN0_INT 2
-
 CircularBuffer<int, 10> esp_status_buffer;
 uint16_t esp_status_counter;
 
@@ -22,8 +18,8 @@ int velocityData_;
 int torqueData_;
 
 // REPLACE WITH YOUR RECEIVER MAC Address
-//uint8_t Address[] = {0xAC, 0x0B, 0xFB, 0x6F, 0x40, 0x70}; //stamp
-uint8_t Address[] = {0x8C, 0xAA, 0xB5, 0x81, 0x72, 0x7C}; //core2
+uint8_t Address[] = {0xAC, 0x0B, 0xFB, 0x6F, 0x40, 0x70}; //stamp
+//uint8_t Address[] = {0x8C, 0xAA, 0xB5, 0x81, 0x72, 0x7C}; //core2
 
 typedef struct struct_message_to_Slave
 {
@@ -85,7 +81,7 @@ void init_esp()
   // Init ESP-NOW
   if (esp_now_init() == ESP_OK)
   {
-    M5.Lcd.printf("\n\n Success for init ESP NOW \n\n");
+    M5.Lcd.println("Success for init ESP NOW");
   }
   esp_now_register_send_cb(OnDataSent);
   esp_now_register_recv_cb(OnDataRecv);
@@ -96,11 +92,11 @@ void init_esp()
   peerInfo.encrypt = false;
   if (esp_now_add_peer(&peerInfo) != ESP_OK)
   {
-    M5.Lcd.println("\n Failed to add peer1\n");
+    M5.Lcd.println("Failed to add peer1");
   }
   else
   {
-    M5.Lcd.println("\n Success to add peer1\n");
+    M5.Lcd.println("Success to add peer1");
   }
 }
 
